@@ -1,5 +1,7 @@
 # Agent Gateway
 
+[![tests](https://github.com/pankajashokmagadum/agent-gateway/actions/workflows/tests.yml/badge.svg)](https://github.com/pankajashokmagadum/agent-gateway/actions/workflows/tests.yml)
+
 An authorization gateway for AI agents. Agents propose actions; ordinary code
 decides whether they run; every decision is written to a tamper-evident log
 that names the person the agent was acting for.
