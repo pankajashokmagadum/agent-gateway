@@ -1,0 +1,11 @@
+.env
+.env.*
+.git
+.venv
+venv
+.adk
+__pycache__
+*.db
+data/audit.jsonl
+data/chroma
+_old

@@ -1,0 +1,11 @@
+# Agents, MCP and `adk eval`. The gateway itself (gateway/, evals/attacks.py,
+# demo.py) needs only the Python standard library.
+google-adk[extensions,mcp,eval]>=2.0
+python-dotenv
+
+# Vector retrieval over data/policies. Optional: without it, policy search
+# falls back to BM25 and says so in every result.
+chromadb>=1.0
+
+# Tests
+pytest

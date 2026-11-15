@@ -1,0 +1,25 @@
+model_list:
+  - model_name: fde-router
+    litellm_params:
+      model: ollama/qwen3:1.7b
+      api_base: http://localhost:11435
+
+  - model_name: fde-gemini
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GOOGLE_API_KEY
+
+router_settings:
+  fallbacks:
+    - fde-router: ["fde-gemini"]
+  num_retries: 0
+  allowed_fails: 1
+  cooldown_time: 60
+
+litellm_settings:
+  request_timeout: 60
+  num_retries: 0
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  allow_requests_on_db_unavailable: true

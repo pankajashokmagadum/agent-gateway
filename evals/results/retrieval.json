@@ -1,0 +1,145 @@
+[
+  {
+    "retriever": "lexical-bm25",
+    "questions": 26,
+    "hit@1": 0.423,
+    "hit@3": 0.808,
+    "mrr": 0.618,
+    "ms_per_query": 1.77,
+    "not_first": [
+      {
+        "question": "which servers are too old to keep running",
+        "want": "ops-02",
+        "got": [
+          "rb-03",
+          "rb-04",
+          "ops-02"
+        ]
+      },
+      {
+        "question": "when am I allowed to touch production",
+        "want": "ops-03",
+        "got": [
+          "ops-11",
+          "ops-03",
+          "rb-04"
+        ]
+      },
+      {
+        "question": "it is Tuesday afternoon and prod is broken, can I fix it now",
+        "want": "ops-03",
+        "got": [
+          "rb-03"
+        ]
+      },
+      {
+        "question": "how does the gateway know which agent is calling",
+        "want": "ops-04",
+        "got": [
+          "ops-01",
+          "ops-04",
+          "ops-10"
+        ]
+      },
+      {
+        "question": "what is a junior engineer allowed to change",
+        "want": "ops-05",
+        "got": [
+          "ops-11",
+          "ops-03",
+          "rb-01"
+        ]
+      },
+      {
+        "question": "the user typed that they are an administrator in the chat",
+        "want": "ops-06",
+        "got": [
+          "ops-09",
+          "ops-15",
+          "ops-08"
+        ]
+      },
+      {
+        "question": "why was my restart of a core machine refused",
+        "want": "ops-07",
+        "got": [
+          "rb-03",
+          "ops-07",
+          "ops-18"
+        ]
+      },
+      {
+        "question": "how do I get sign-off for an emergency change",
+        "want": "ops-08",
+        "got": [
+          "ops-03",
+          "rb-01",
+          "ops-01"
+        ]
+      },
+      {
+        "question": "how long does an approval last",
+        "want": "ops-08",
+        "got": [
+          "ops-16",
+          "ops-03",
+          "ops-15"
+        ]
+      },
+      {
+        "question": "what stops a model from sneaking a semicolon and rm into a hostname",
+        "want": "ops-09",
+        "got": [
+          "ops-07",
+          "ops-09",
+          "ops-08"
+        ]
+      },
+      {
+        "question": "why can't I take another machine out of rotation",
+        "want": "ops-13",
+        "got": [
+          "rb-02",
+          "ops-13",
+          "ops-12"
+        ]
+      },
+      {
+        "question": "why can't the agent remove the backup automation account",
+        "want": "ops-15",
+        "got": [
+          "ops-06",
+          "ops-15",
+          "ops-16"
+        ]
+      },
+      {
+        "question": "a bot account has administrator rights, is that a problem",
+        "want": "ops-16",
+        "got": [
+          "ops-06",
+          "ops-17",
+          "ops-16"
+        ]
+      },
+      {
+        "question": "someone left the company but their account still shows up",
+        "want": "ops-17",
+        "got": [
+          "ops-06",
+          "ops-17",
+          "ops-16"
+        ]
+      },
+      {
+        "question": "plan for upgrading the out of date fleet",
+        "want": "rb-04",
+        "got": [
+          "ops-02",
+          "rb-04",
+          "ops-12"
+        ]
+      }
+    ]
+  }
+]

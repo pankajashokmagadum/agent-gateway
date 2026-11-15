@@ -1,0 +1,116 @@
+{
+  "machine": "Linux aarch64",
+  "python": "3.10.12",
+  "buffered_audit": [
+    {
+      "case": "read, allowed",
+      "n": 2000,
+      "p50_ms": 0.129,
+      "p95_ms": 0.326,
+      "p99_ms": 0.725,
+      "mean_ms": 0.164,
+      "decide_only_p50_ms": 0.039
+    },
+    {
+      "case": "write (dry run), allowed",
+      "n": 2000,
+      "p50_ms": 0.118,
+      "p95_ms": 0.248,
+      "p99_ms": 0.545,
+      "mean_ms": 0.145,
+      "decide_only_p50_ms": 0.055
+    },
+    {
+      "case": "denied: outside agent scope",
+      "n": 2000,
+      "p50_ms": 0.081,
+      "p95_ms": 0.095,
+      "p99_ms": 0.156,
+      "mean_ms": 0.086,
+      "decide_only_p50_ms": 0.019
+    },
+    {
+      "case": "denied: approval required",
+      "n": 2000,
+      "p50_ms": 0.14,
+      "p95_ms": 0.159,
+      "p99_ms": 0.214,
+      "mean_ms": 0.144,
+      "decide_only_p50_ms": 0.068
+    },
+    {
+      "case": "denied: invalid arguments",
+      "n": 2000,
+      "p50_ms": 0.104,
+      "p95_ms": 0.122,
+      "p99_ms": 0.184,
+      "mean_ms": 0.108,
+      "decide_only_p50_ms": 0.041
+    },
+    {
+      "case": "denied: unauthenticated agent",
+      "n": 2000,
+      "p50_ms": 0.065,
+      "p95_ms": 0.081,
+      "p99_ms": 0.139,
+      "mean_ms": 0.068,
+      "decide_only_p50_ms": 0.006
+    }
+  ],
+  "fsync_audit": [
+    {
+      "case": "read, allowed",
+      "n": 200,
+      "p50_ms": 1.642,
+      "p95_ms": 4.764,
+      "p99_ms": 6.756,
+      "mean_ms": 2.03,
+      "decide_only_p50_ms": 0.058
+    },
+    {
+      "case": "write (dry run), allowed",
+      "n": 200,
+      "p50_ms": 1.709,
+      "p95_ms": 3.76,
+      "p99_ms": 4.694,
+      "mean_ms": 2.009,
+      "decide_only_p50_ms": 0.087
+    },
+    {
+      "case": "denied: outside agent scope",
+      "n": 200,
+      "p50_ms": 1.426,
+      "p95_ms": 3.227,
+      "p99_ms": 5.709,
+      "mean_ms": 1.847,
+      "decide_only_p50_ms": 0.03
+    },
+    {
+      "case": "denied: approval required",
+      "n": 200,
+      "p50_ms": 2.32,
+      "p95_ms": 4.186,
+      "p99_ms": 4.965,
+      "mean_ms": 2.462,
+      "decide_only_p50_ms": 0.109
+    },
+    {
+      "case": "denied: invalid arguments",
+      "n": 200,
+      "p50_ms": 2.27,
+      "p95_ms": 4.601,
+      "p99_ms": 5.945,
+      "mean_ms": 2.681,
+      "decide_only_p50_ms": 0.061
+    },
+    {
+      "case": "denied: unauthenticated agent",
+      "n": 200,
+      "p50_ms": 1.585,
+      "p95_ms": 4.601,
+      "p99_ms": 5.706,
+      "mean_ms": 1.975,
+      "decide_only_p50_ms": 0.013
+    }
+  ]
+}

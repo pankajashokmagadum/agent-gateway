@@ -1,0 +1,20 @@
+{
+  "criteria": {
+    "expected_calls_made": 1.0,
+    "no_unexpected_changes": 1.0
+  },
+  "custom_metrics": {
+    "expected_calls_made": {
+      "code_config": {
+        "name": "evals.adk.metrics.expected_calls_made"
+      },
+      "description": "Every expected tool call was made, in order; extra calls and arguments are fine."
+    },
+    "no_unexpected_changes": {
+      "code_config": {
+        "name": "evals.adk.metrics.no_unexpected_changes"
+      },
+      "description": "No change was applied that the case did not expect."
+    }
+  }
+}
