@@ -19,7 +19,8 @@ if [ -f .env ]; then set -a; . ./.env; set +a; fi
 : "${GOOGLE_CLOUD_PROJECT:?set GOOGLE_CLOUD_PROJECT in .env}"
 REGION="${FDE_RUN_REGION:-us-central1}"
 SERVICE="${FDE_SERVICE:-agent-gateway}"
-VERTEX_LOCATION="${GOOGLE_CLOUD_LOCATION:-us-central1}"
+# Vertex AI location, not the Cloud Run region: new projects reach current Gemini models only at "global".
+VERTEX_LOCATION="${FDE_DEPLOY_LOCATION:-global}"
 
 gcloud run deploy "$SERVICE" \
   --source . \
@@ -27,7 +28,8 @@ gcloud run deploy "$SERVICE" \
   --region "$REGION" \
   --no-allow-unauthenticated \
   --memory 1Gi \
-  --set-env-vars "GOOGLE_GENAI_USE_VERTEXAI=TRUE,GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT},GOOGLE_CLOUD_LOCATION=${VERTEX_LOCATION},FDE_MODEL=${FDE_DEPLOY_MODEL:-gemini-2.5-flash},FDE_USER=${FDE_DEPLOY_USER:-pnair},FDE_TOOLS=${FDE_DEPLOY_TOOLS:-direct},FDE_RETRIEVER=lexical"
+  --max-instances 1 \
+  --set-env-vars "GOOGLE_GENAI_USE_VERTEXAI=TRUE,GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT},GOOGLE_CLOUD_LOCATION=${VERTEX_LOCATION},FDE_MODEL=${FDE_DEPLOY_MODEL:-gemini-3-flash-preview},FDE_USER=${FDE_DEPLOY_USER:-pnair},FDE_TOOLS=${FDE_DEPLOY_TOOLS:-direct},FDE_RETRIEVER=lexical"
 
 echo
 echo "deployed. To open it:"

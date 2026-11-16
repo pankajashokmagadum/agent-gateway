@@ -134,7 +134,7 @@ same request as `tkim` (engineer), `pnair` (operator) and `jchen` (admin).
 |---|---|
 | `litellm:openai/fde-router` | the local LiteLLM router in `config.yaml` (start it with `litellm --config config.yaml`) |
 | `gemini-2.5-flash` | Gemini with `GOOGLE_API_KEY` |
-| `gemini-2.5-flash` and `GOOGLE_GENAI_USE_VERTEXAI=TRUE` | Gemini on Vertex AI, using `GOOGLE_CLOUD_PROJECT` and `GOOGLE_CLOUD_LOCATION` |
+| `gemini-3-flash-preview` and `GOOGLE_GENAI_USE_VERTEXAI=TRUE` | Gemini on Vertex AI, using `GOOGLE_CLOUD_PROJECT` and `GOOGLE_CLOUD_LOCATION` (`global`: new projects get no Gemini models in `us-central1`, and no `gemini-2.5-flash` at all) |
 
 `agents` works on `data/fde.db` and `data/audit.jsonl`. `sandbox` is the same
 agents on a throwaway copy of the world with the clock pinned to the seed
@@ -260,17 +260,26 @@ is tested with scripted models; results for real models are not in yet.
 ```bash
 gcloud auth login
 ./deploy/cloudrun.sh        # reads GOOGLE_CLOUD_PROJECT and friends from .env
+gcloud run services proxy agent-gateway --region us-central1   # then open http://localhost:8080
 ```
 
 This builds the `Dockerfile` and deploys it to Cloud Run, serving the agents
-with `adk web` on Gemini through Vertex AI. No API key is sent to Cloud Run;
-the service account needs the Vertex AI User role. The service is deployed
-private, because the web UI lets whoever can reach it run the agents on your
-bill. Open it with `gcloud run services proxy`.
+with `adk web` on Gemini through Vertex AI. No API key is sent to Cloud Run.
+The default compute service account needs the Vertex AI User role, and on a
+new project also Cloud Build Builder to build the image. The service is
+deployed private, with at most one instance, because the web UI lets whoever
+can reach it run the agents on your bill.
 
-Not yet built or deployed: the server start command is tested locally, the
-image and the deploy are not. The database and audit log live on the
-container's disk in this setup, so they reset with each revision.
+Deployed and checked on 16 November 2026: Cloud Run in `us-central1`,
+`gemini-3-flash-preview` on Vertex AI, sponsor `tkim`. Asked "authd is failing
+on core-use1-02, restart it.", the planner has inventory look up the service
+and its runbook, hands the restart to remediation, and the gateway answers
+DENY with `TIER_ABOVE_CEILING` (ops-07) and `OUTSIDE_CHANGE_WINDOW` (ops-03),
+naming the admin approval that would unblock it. A request without Google
+credentials gets 403. The database and audit log live on the container's disk,
+so they reset with each revision.
+
+![The deployed ADK web UI: the gateway denies restarting authd on core-use1-02 and names the approval that would unblock it](docs/cloud-run-deny.jpg)
 
 ## Layout
 
@@ -283,6 +292,6 @@ rag/          chunking, BM25 and Chroma retrievers over data/policies
 data/         seed.py, 23 policy and runbook documents
 evals/        attacks, bench, retrieval, models, adk/ (eval set and metrics)
 tests/        what must work; evals/attacks.py covers what must not
-deploy/       cloudrun.sh
+deploy/       cloudrun.sh, image-requirements.txt (the image's exact packages)
 demo.py       the scripted walkthrough
 ```
